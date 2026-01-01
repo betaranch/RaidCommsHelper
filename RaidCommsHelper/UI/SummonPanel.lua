@@ -15,6 +15,44 @@ local listItems = {}       -- List item widgets
 -- Colors
 local COLORS = Widgets.COLORS
 
+-- ============================================================================
+-- INSTANCE ZONE MAPPING
+-- Some raids have multiple subzones (e.g., Trial of Valor has "Halls of Valor",
+-- "The Bridge", "Helheim"). Players in different subzones should still count
+-- as "present" in the same instance.
+-- ============================================================================
+
+-- Map instance IDs to all valid zone names for that instance
+local INSTANCE_ZONES = {
+    -- Trial of Valor (instance ID 1648) - has multiple subzones
+    [1648] = {
+        ["Trial of Valor"] = true,
+        ["Halls of Valor"] = true,  -- First boss area (shares name with dungeon)
+        ["The Bridge"] = true,
+        ["Helheim"] = true,
+    },
+    -- Add other problematic instances here if discovered
+}
+
+-- Check if a zone name counts as "present" in the current instance
+local function IsPlayerInSameInstance(playerZone, myZone, myInstanceID)
+    -- If zones match exactly, they are in the same place
+    if playerZone == myZone then
+        return true
+    end
+
+    -- If we have a zone mapping for this instance, check if both zones are valid
+    if myInstanceID and INSTANCE_ZONES[myInstanceID] then
+        local validZones = INSTANCE_ZONES[myInstanceID]
+        -- Both player zone and my zone must be in the valid list
+        if validZones[playerZone] and validZones[myZone] then
+            return true
+        end
+    end
+
+    return false
+end
+
 -- Event frame for roster/zone updates
 local eventFrame = CreateFrame("Frame")
 local pendingRefresh = false
@@ -42,7 +80,7 @@ end)
 -- DATA FUNCTIONS
 -- ============================================================================
 
--- Get players who need summons (not in current zone)
+-- Get players who need summons (not in current zone/instance)
 function SummonPanel:GetPlayersNeedingSummon()
     if not IsInRaid() then return {}, 0, 0 end
 
@@ -51,6 +89,14 @@ function SummonPanel:GetPlayersNeedingSummon()
     local inZoneCount = 0
     local offlineCount = 0
     local numMembers = GetNumGroupMembers()
+
+    -- Get current instance ID for multi-subzone handling
+    local myInstanceID = nil
+    local inInstance = IsInInstance()
+    if inInstance then
+        local _, _, _, _, _, _, _, instanceID = GetInstanceInfo()
+        myInstanceID = instanceID
+    end
 
     for i = 1, numMembers do
         local name, rank, subgroup, level, class, fileName, zone, online, isDead, role = GetRaidRosterInfo(i)
@@ -69,8 +115,8 @@ function SummonPanel:GetPlayersNeedingSummon()
                     zone = zone or "Unknown",
                     online = false,
                 })
-            elseif zone ~= myZone then
-                -- Online but not in our zone
+            elseif not IsPlayerInSameInstance(zone, myZone, myInstanceID) then
+                -- Online but not in our zone/instance
                 table.insert(needSummon, {
                     index = i,
                     name = shortName,
