@@ -1,0 +1,17 @@
+package-as: RaidCommsHelper
+
+ignore:
+  - README.md
+  - .gitignore
+  - .github
+  - docs
+  - reference
+  - "*.md"
+  - ".*"
+
+manual-changelog:
+  filename: CHANGELOG.md
+  markup-type: markdown
+
+move-folders:
+  RaidCommsHelper: RaidCommsHelper

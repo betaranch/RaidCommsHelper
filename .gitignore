@@ -15,7 +15,6 @@ SavedVariables/
 
 # Build/package artifacts
 .release/
-.pkgmeta
 *.zip
 
 # Libs that should be packaged separately (if using BigWigs packager)
@@ -28,4 +27,6 @@ SavedVariables/
 # Dev reference materials (not part of addon)
 reference/
 docs/
-*.md
+CLAUDE.md
+RaidCommsHelper.md
+copy-paste.md
