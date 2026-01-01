@@ -1,0 +1,35 @@
+<Bindings>
+    <Binding name="RAIDCOMMSHELPER_SLOT1" category="BINDING_HEADER_RAIDCOMMSHELPER">
+        RaidCommsHelper_SendSlot(1)
+    </Binding>
+    <Binding name="RAIDCOMMSHELPER_SLOT2" category="BINDING_HEADER_RAIDCOMMSHELPER">
+        RaidCommsHelper_SendSlot(2)
+    </Binding>
+    <Binding name="RAIDCOMMSHELPER_SLOT3" category="BINDING_HEADER_RAIDCOMMSHELPER">
+        RaidCommsHelper_SendSlot(3)
+    </Binding>
+    <Binding name="RAIDCOMMSHELPER_SLOT4" category="BINDING_HEADER_RAIDCOMMSHELPER">
+        RaidCommsHelper_SendSlot(4)
+    </Binding>
+    <Binding name="RAIDCOMMSHELPER_SLOT5" category="BINDING_HEADER_RAIDCOMMSHELPER">
+        RaidCommsHelper_SendSlot(5)
+    </Binding>
+    <Binding name="RAIDCOMMSHELPER_SLOT6" category="BINDING_HEADER_RAIDCOMMSHELPER">
+        RaidCommsHelper_SendSlot(6)
+    </Binding>
+    <Binding name="RAIDCOMMSHELPER_SLOT7" category="BINDING_HEADER_RAIDCOMMSHELPER">
+        RaidCommsHelper_SendSlot(7)
+    </Binding>
+    <Binding name="RAIDCOMMSHELPER_SLOT8" category="BINDING_HEADER_RAIDCOMMSHELPER">
+        RaidCommsHelper_SendSlot(8)
+    </Binding>
+    <Binding name="RAIDCOMMSHELPER_SLOT9" category="BINDING_HEADER_RAIDCOMMSHELPER">
+        RaidCommsHelper_SendSlot(9)
+    </Binding>
+    <Binding name="RAIDCOMMSHELPER_TOGGLE" category="BINDING_HEADER_RAIDCOMMSHELPER">
+        RaidCommsHelper_ToggleWindow()
+    </Binding>
+    <Binding name="RAIDCOMMSHELPER_TOGGLE_VERS" category="BINDING_HEADER_RAIDCOMMSHELPER">
+        RaidCommsHelper_OpenVersPanel()
+    </Binding>
+</Bindings>
